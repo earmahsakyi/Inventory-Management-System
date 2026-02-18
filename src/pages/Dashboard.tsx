@@ -1,0 +1,46 @@
+import { Routes, Route } from "react-router-dom";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import DashboardTopNav from "@/components/dashboard/DashboardTopNav";
+import KPICards from "@/components/dashboard/KPICards";
+import DashboardCharts from "@/components/dashboard/DashboardCharts";
+import RecentSalesTable from "@/components/dashboard/RecentSalesTable";
+import LowStockCard from "@/components/dashboard/LowStockCard";
+import ProductsPage from "@/pages/dashboard/ProductsPage";
+import SuppliersPage from "@/pages/dashboard/SuppliersPage";
+import CategoriesPage from "@/pages/dashboard/CategoriesPage";
+import SalesPage from "@/pages/dashboard/SalesPage";
+import ReportsPage from "@/pages/dashboard/ReportsPage";
+
+const DashboardHome = () => (
+  <div className="space-y-6">
+    <KPICards />
+    <DashboardCharts />
+    <div className="grid lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2">
+        <RecentSalesTable />
+      </div>
+      <LowStockCard />
+    </div>
+  </div>
+);
+
+const Dashboard = () => (
+  <div className="flex min-h-screen bg-background">
+    <DashboardSidebar />
+    <div className="flex-1 flex flex-col ml-64">
+      <DashboardTopNav />
+      <main className="flex-1 p-6">
+        <Routes>
+          <Route index element={<DashboardHome />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="suppliers" element={<SuppliersPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="sales" element={<SalesPage />} />
+          <Route path="reports" element={<ReportsPage />} />
+        </Routes>
+      </main>
+    </div>
+  </div>
+);
+
+export default Dashboard;

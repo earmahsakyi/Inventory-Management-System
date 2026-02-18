@@ -2,7 +2,9 @@ const Sale = require('../models/Sale');
 
 exports.createSale = async (req, res) => {
     try {
-        const { created_by, items } = req.body;
+        const created_by = req.admin.name;
+        
+        const {  items } = req.body;
 
         if (!items || !Array.isArray(items) || items.length === 0) {
             return res.status(400).json({

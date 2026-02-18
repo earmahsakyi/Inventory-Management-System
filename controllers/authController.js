@@ -104,7 +104,7 @@ exports.AuthUserToken = async (req, res) => {
                 <strong>Next step:</strong> Contact admin or wait if this is your 1st or 2nd lock.
               </div>
               <p>If this activity was not initiated by you, we recommend resetting your password after regaining access.</p>
-              <p>Thank you,<br>Stock Solutions</p>
+              <p>Thank you,<br>InvenFlow</p>
             </div>
           `;
                 // Send mail to locked account
@@ -139,7 +139,8 @@ exports.AuthUserToken = async (req, res) => {
         const payload = {
             admin : {
                 id: admin.id,
-                role: admin.role
+                role: admin.role,
+                name: admin.name
             }
         }
 
@@ -156,7 +157,8 @@ exports.AuthUserToken = async (req, res) => {
                     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
                 }).json({
                     role:admin.role,
-                    adminId:admin.id
+                    adminId:admin.id,
+                    name: admin.name
                 })
             }
 
@@ -192,7 +194,8 @@ exports.registerAdmin = async (req,res) => {
           const payload = {
             admin : {
                 id: admin.id,
-                role: admin.role
+                role: admin.role,
+                name: admin.name
             }
         }
 
@@ -209,7 +212,8 @@ exports.registerAdmin = async (req,res) => {
                     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
                 }).json({
                     role:admin.role,
-                    adminId:admin.id
+                    adminId:admin.id,
+                    name: admin.name
                 })
             }
 
@@ -260,7 +264,7 @@ exports.forgotPassword = async (req, res) => {
         subject: 'Password Reset Verification Code',
         html: `
          <div style="font-family: Arial, sans-serif; background-color: #f9fafc; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; border: 1px solid #e5e7eb;">
-  <h2 style="color: #FF3B30; text-align: center; margin-bottom: 10px;">Stock Solutions</h2>
+  <h2 style="color: #FF3B30; text-align: center; margin-bottom: 10px;">InvenFlow</h2>
   
   <p style="font-size: 16px; color: #333;">Hello,</p>
   <p style="font-size: 16px; color: #333;">
@@ -284,7 +288,7 @@ exports.forgotPassword = async (req, res) => {
   <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
 
   <p style="font-size: 12px; color: #999; text-align: center;">
-    &copy; ${new Date().getFullYear()} Stock Solutions. All rights reserved.
+    &copy; ${new Date().getFullYear()} InvenFlow. All rights reserved.
   </p>
 </div>
 
@@ -389,7 +393,7 @@ exports.RequestOTP =  async (req, res) => {
         subject: 'One Time Passcode',
         html: `
          <div style="font-family: Arial, sans-serif; background-color: #f9fafc; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; border: 1px solid #e5e7eb;">
-            <h2 style="color: #FF3B30; text-align: center; margin-bottom: 10px;">Stock Solutions</h2>
+            <h2 style="color: #FF3B30; text-align: center; margin-bottom: 10px;">InvenFlow</h2>
             
             <p style="font-size: 16px; color: #333;">Hello,</p>
             <p style="font-size: 16px; color: #333;">
@@ -413,7 +417,7 @@ exports.RequestOTP =  async (req, res) => {
             <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
 
             <p style="font-size: 12px; color: #999; text-align: center;">
-                &copy; ${new Date().getFullYear()} Stock Solutions. All rights reserved.
+                &copy; ${new Date().getFullYear()} InvenFlow. All rights reserved.
             </p>
             </div>
 
@@ -472,7 +476,7 @@ exports.unlockUser = async (req, res) => {
       subject: 'Account Unlocked',
       html: `
         <div style="font-family: Arial, sans-serif; background-color: #f9fafc; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; border: 1px solid #e5e7eb;">
-          <h2 style="color: #007AFF; text-align: center; margin-bottom: 10px;">Stock Solutions</h2>
+          <h2 style="color: #007AFF; text-align: center; margin-bottom: 10px;">InvenFlow</h2>
           <p style="font-size: 16px; color: #333;">Hello,</p>
           <p style="font-size: 16px; color: #333;">
             Your account has been unlocked. You can now log in to your account.
@@ -482,7 +486,7 @@ exports.unlockUser = async (req, res) => {
           </p>
           <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
           <p style="font-size: 12px; color: #999; text-align: center;">
-            &copy; ${new Date().getFullYear()} Stock Solutions. All rights reserved.
+            &copy; ${new Date().getFullYear()} InvenFlow. All rights reserved.
           </p>
         </div>
       `

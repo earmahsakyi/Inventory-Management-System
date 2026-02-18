@@ -9,4 +9,4 @@ router.get('/:category_id',auth, categoryController.getCategoryById);
 router.put('/:category_id',auth, categoryController.updateCategory);
 router.delete('/:category_id',auth, categoryController.deleteCategory);
 
-module.exports = router;
+module.exports = router; 

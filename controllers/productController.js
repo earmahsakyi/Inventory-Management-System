@@ -8,7 +8,7 @@ exports.createProduct = async (req, res) => {
 
         if (!name || price === undefined || !supplier_id || !category_id) {
             return res.status(400).json({
-                success: false,
+                success: false, 
                 message: 'Name, price, supplier_id, and category_id are required!'
             });
         }

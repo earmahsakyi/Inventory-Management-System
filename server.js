@@ -21,6 +21,44 @@ connectDB();
 app.use(express.json({extended: false}));
 app.use(cookieParser())
 
+// Security middleware
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "blob:",
+          "https://ui-avatars.com",
+          "https://*.amazonaws.com",
+          "https://*.s3.amazonaws.com",
+        ],
+        connectSrc: ["'self'", "ws:", "wss:"],
+        fontSrc: ["'self'", "data:"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'none'"],
+      },
+    },
+  })
+);
+
+// Trust proxy - IMPORTANT for getting real IP addresses behind reverse proxies/load balancers
+app.set('trust proxy', 1);
+
+// CORS
+app.use(cors(
+  {
+  origin: 'http://localhost:3000',
+  credentials: true
+}
+));
+
+
 
 // Extract client IP for all routes
 app.use(getClientIp);
@@ -41,7 +79,16 @@ app.use('/api/sales',require('./routes/sales'));
 app.use('/api/reports',require('./routes/report'));
 
 
+// Serve frontend build (important for Railway deployment)
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+// For all other routes (non-API), return React index.html (for React Router)
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`🚀 Server running on:${PORT}`));
+app.listen(PORT, () => console.log(` Server running on:${PORT}`));
