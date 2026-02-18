@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Search, Bell, Package, Truck } from "lucide-react";
+import { Search, Bell, Package, Truck, Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/store/store";
 
@@ -11,7 +11,11 @@ interface Result {
   route: string;
 }
 
-const DashboardTopNav = () => {
+interface DashboardTopNavProps {
+  onMenuClick: () => void;
+}
+
+const DashboardTopNav = ({ onMenuClick }: DashboardTopNavProps) => {
   const navigate = useNavigate();
   const username = useAppSelector((state) => state.auth.username);
   const { products } = useAppSelector((state) => state.product);
@@ -79,9 +83,18 @@ const DashboardTopNav = () => {
   };
 
   return (
-    <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-20">
+    <header className="h-16 border-b border-border flex items-center justify-between px-4 md:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-20 gap-4">
+      {/* Hamburger — mobile only */}
+      <button
+        onClick={onMenuClick}
+        className="lg:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors shrink-0"
+        aria-label="Open menu"
+      >
+        <Menu className="h-5 w-5 text-muted-foreground" />
+      </button>
+
       {/* Search */}
-      <div className="relative w-80" ref={containerRef}>
+      <div className="relative flex-1 max-w-xs md:max-w-sm" ref={containerRef}>
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <input
           type="text"
@@ -135,13 +148,13 @@ const DashboardTopNav = () => {
       </div>
 
       {/* Right */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4 shrink-0">
         <button className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors duration-200">
           <Bell className="h-4 w-4 text-muted-foreground" />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary" />
         </button>
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-semibold">
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-semibold shrink-0">
             {username?.slice(0, 2).toUpperCase()}
           </div>
           <div className="hidden sm:block">

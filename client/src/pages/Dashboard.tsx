@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardTopNav from "@/components/dashboard/DashboardTopNav";
@@ -24,23 +25,41 @@ const DashboardHome = () => (
   </div>
 );
 
-const Dashboard = () => (
-  <div className="flex min-h-screen bg-background">
-    <DashboardSidebar />
-    <div className="flex-1 flex flex-col ml-64">
-      <DashboardTopNav />
-      <main className="flex-1 p-6">
-        <Routes>
-          <Route index element={<DashboardHome />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="suppliers" element={<SuppliersPage />} />
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="sales" element={<SalesPage />} />
-          <Route path="reports" element={<ReportsPage />} />
-        </Routes>
-      </main>
+const Dashboard = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <div className="flex min-h-screen bg-background">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <DashboardSidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col min-w-0 lg:ml-64">
+        <DashboardTopNav onMenuClick={() => setSidebarOpen(true)} />
+        <main className="flex-1 p-4 md:p-6">
+          <Routes>
+            <Route index element={<DashboardHome />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="suppliers" element={<SuppliersPage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="sales" element={<SalesPage />} />
+            <Route path="reports" element={<ReportsPage />} />
+          </Routes>
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Dashboard;
