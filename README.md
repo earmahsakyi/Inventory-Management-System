@@ -8,10 +8,12 @@
 
 | Landing Page | Login Page | Dashboard |
 |---|---|---|
-| ![Landing Page]
+## Landing Page
 <img width="1920" height="962" alt="landing" src="https://github.com/user-attachments/assets/c7d281e7-160b-4ba7-b8ff-837ade845feb" />
-![SignUp Page]<img width="1920" height="911" alt="sign up" src="https://github.com/user-attachments/assets/decef50a-fc8a-43e2-811a-11900fa22030" />
-![Dashboard](<img width="1920" height="974" alt="dashboard" src="https://github.com/user-attachments/assets/1a63e061-115c-43ca-9efb-59b288ea8b39" />
+## SignUp Page
+<img width="1920" height="911" alt="sign up" src="https://github.com/user-attachments/assets/decef50a-fc8a-43e2-811a-11900fa22030" />
+## Dashboard
+<img width="1920" height="974" alt="dashboard" src="https://github.com/user-attachments/assets/1a63e061-115c-43ca-9efb-59b288ea8b39" />
 
 ---
 
