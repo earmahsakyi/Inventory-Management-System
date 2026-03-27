@@ -12,3 +12,4 @@ router.put('/:supplier_id',auth, supplierController.updateSupplier);
 router.delete('/:supplier_id',auth, supplierController.deleteSupplier);
 
 module.exports = router;
+

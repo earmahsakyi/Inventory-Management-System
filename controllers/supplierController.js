@@ -1,5 +1,7 @@
 const Supplier = require('../models/Supplier');
 
+
+//create a supplier
 exports.createSupplier = async (req, res) => {
     try {
         const {name, email, phone, address} = req.body;
